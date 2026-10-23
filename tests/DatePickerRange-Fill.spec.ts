@@ -1,38 +1,39 @@
 import { test, expect, Locator } from "@playwright/test"
 
-test("Verify Date Picker 3 - Select Date Range", async ({ page }) => {
+test("Verify Date Picker 3 - Different Years", async ({ page }) => {
 
     await page.goto("https://testautomationpractice.blogspot.com/")
 
-    // Date Picker 3 - Start Date
+    // Start Date
     const startDate: Locator = page.locator("#start-date")
     await expect(startDate).toBeVisible()
 
-    // Date Picker 3 - End Date
+    // End Date
     const endDate: Locator = page.locator("#end-date")
     await expect(endDate).toBeVisible()
 
-    // Fill Start Date
-    await startDate.fill("2027-10-25")
+    // Fill Start Date - October 2026
+    await startDate.fill("2026-10-25")
 
-    // Fill End Date
-    await endDate.fill("2027-10-30")
+    // Fill End Date - January 2027
+    await endDate.fill("2027-01-10")
 
     // Verify Start Date
-    await expect(startDate).toHaveValue("2027-10-25")
+    await expect(startDate).toHaveValue("2026-10-25")
 
     // Verify End Date
-    await expect(endDate).toHaveValue("2027-10-30")
+    await expect(endDate).toHaveValue("2027-01-10")
 
-    // Click Submit button
+    // Click Submit
     await page.locator(".submit-btn").click()
 
-    // Verify the result
+    // Verify Result
     const result: Locator = page.locator("#result")
     await expect(result).toBeVisible()
 
-    console.log("Start Date: 25 October 2027")
-    console.log("End Date: 30 October 2027")
+    console.log("Start Date: 25 October 2026")
+    console.log("End Date: 10 January 2027")
 
     await page.waitForTimeout(3000)
+
 })
